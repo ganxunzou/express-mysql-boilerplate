@@ -1,0 +1,41 @@
+extends layout
+
+block css
+  link(rel='stylesheet', href='/css/signin.css')
+
+block nav
+
+script.
+  
+block content
+  div(class="container")
+    div(class="row")
+      div(class="col-md-12 col-lg-7")
+      .jumbotron(style="background:#f5f5f5")
+        h1.display-4 欢迎光临 
+        p.lead
+          | 这是一个开发注册的系统，你的注册让我感到十分荣幸
+        p
+          | - 小甘童鞋宣（ganxunzou@163.com）
+        hr.my-4
+      div(class="col-md-12 col-lg-5")
+        div( class="border rounded pb-5 bg-white")
+          div(class="text-center border-bottom border-primary") 
+            div(class="row")
+              div(class="col-6")
+                h3(class="bg-light p-3 m-0") Sign in  
+              div(class="col-6")
+                h3(class="p-3 m-0") Sign up
+          form(action="" class="px-5")
+            div(class="from-group py-3")
+              label(for="") Username
+              input(type="text" class="form-control" placeholder="Enter Username")    
+            div(class="from-group pb-3")
+              label(for="") Password
+              input(type="text" class="form-control" placeholder="Enter Password")       
+            div(class="form-check pb-3")
+              input(type="checkbox" class="form-check-input" placeholder="Enter Password") 
+              label(class="form-check-label") Remeber me
+
+            button(type="submit" class="btn btn-primary btn-lg btn-block") Sign in
+    

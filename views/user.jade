@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title} 
+  div
+    script.
+      var something = function() {
+        console.log('something');
+      }
+    button(onclick='something()') Click
+
+  button(type="button", class="btn btn-primary mg5") 新增
+  button(type="button", class="btn btn-primary mg5") 修改
+  button(type="button", class="btn btn-primary mg5") 删除
+
+  div(class="card")
+    div(class="card-header") User List 
+    table(class="table")
+      thead
+        tr 
+          th <input type="checkbox" id="ckAll"/>  
+          th ID
+          th First Name
+          th Last Name
+          th LastModified
+      - for(var i=0; i< users.length; i++)
+        tr
+          th <input type="checkbox" id="ckAll" data-id="#{users[i].id}"/>  
+          td #{users[i].id}
+          td #{users[i].firstName}
+          td #{users[i].lastName}
+          td #{users[i].gmt_modified}
