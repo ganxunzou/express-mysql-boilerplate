@@ -1,13 +1,18 @@
+- var homeActive = path == 'index'?'active':'';
+- var userActive = path == 'user'?'active':'';
+- var btnLbl = isLogin ? '注 销': '登 录';
+- var btnPath = isLogin ? '/users/logout':'/user/login';
+
 nav(class="navbar navbar-expand-md navbar-dark fixed-top bg-dark")
     a(class="navbar-brand" href="/") Express VS MySql
     button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation")
       span(class="navbar-toggler-icon")
     div(class="collapse navbar-collapse" id="navbarCollapse")
       ul( class="navbar-nav mr-auto")
-        li( class="nav-item active")
+        li( class="nav-item" class=homeActive )
           a(class="nav-link" href="/") 首页
-        li( class="nav-item")
+        li( class="nav-item" class=userActive)
           a(class="nav-link" href="/users") 用户管理
 
-      form(action="" class="form-inline mt-2 mt-md-0")
-        a(class="btn btn-outline-primary" href="/users/login" ) 登 录
+      div(action="" class="form-inline mt-2 mt-md-0")
+        a(class="btn btn-outline-primary" href=btnPath ) #{btnLbl}

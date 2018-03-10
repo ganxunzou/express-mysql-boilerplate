@@ -1,14 +1,7 @@
-extends layout
+extends layout.jade
 
 block content
   h1= title
-  p Welcome to #{title} 
-  div
-    script.
-      var something = function() {
-        console.log('something');
-      }
-    button(onclick='something()') Click
 
   button(type="button", class="btn btn-primary mg5") 新增
   button(type="button", class="btn btn-primary mg5") 修改

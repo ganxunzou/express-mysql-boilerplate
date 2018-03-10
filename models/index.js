@@ -5,7 +5,7 @@ var sequelize = require('../common/sequelize');
 
 function load(name) {
   var model = sequelize.import(path.join(__dirname, name));
-  model.sync().then((res)=>{
+  model.sync({force: false}).then((res)=>{
     console.log(`table ${name} is sync`);
   });
   return model;

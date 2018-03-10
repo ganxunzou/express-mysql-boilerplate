@@ -1,34 +1,92 @@
-'use strict';
-
 var utility = require('utility');
 var Sequelize = require('sequelize');
-/*
-CREATE TABLE IF NOT EXISTS `user` (
- `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'primary key',
- `gmt_create` datetime NOT NULL COMMENT 'create time',
- `gmt_modified` datetime NOT NULL COMMENT 'modified time',
- `name` varchar(100) NOT NULL COMMENT 'user name',
- `salt` varchar(100) NOT NULL,
- `password_sha` varchar(100) NOT NULL COMMENT 'user password hash',
- `ip` varchar(64) NOT NULL COMMENT 'user last request ip',
- `roles` varchar(200) NOT NULL DEFAULT '[]',
- `rev` varchar(40) NOT NULL,
- `email` varchar(400) NOT NULL,
- `json` longtext CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT 'json details',
- `npm_user` tinyint(1) DEFAULT '0' COMMENT 'user sync from npm or not, 1: true, other: false',
- PRIMARY KEY (`id`),
- UNIQUE KEY `user_name` (`name`),
- KEY `user_gmt_modified` (`gmt_modified`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='user base info';
-*/
 
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define('user', {
-    firstName: {
+  const User = sequelize.define('user', {
+    id:{ 
+      type: Sequelize.INTEGER, 
+      autoIncrement: true ,
+      primaryKey: true
+    }, // 自增ID
+    // uuid: {
+    //   type: DataTypes.UUID,
+    //   defaultValue: DataTypes.UUIDV1,
+    //   primaryKey: true
+    // },
+    username: {
       type: Sequelize.STRING
     },
-    lastName: {
-      type: Sequelize.STRING
+    password_sha: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      comment: 'user password hash',
+      set(val){
+        // 密码存储自动sha值
+        this.setDataValue('password_sha', utility.sha1(val));
+      }
     }
+  },{
+    tableName: 'com_user',
+    comment: 'this is user table',
+    indexes: [
+      // 在 name 上创建一个唯一索引
+      {
+        unique: true,     
+        fields: ['username']
+      },
+      {
+        fields: ['gmt_modified']
+      }
+    ]
   });
+
+  // 创建密码SHA值
+  function createPasswordSha(password){
+    utility.sha1(password);
+  }
+
+  // 用户认证
+  function auth(username, password){
+    return User.findByName(username).then(user=>{
+      if (user) {
+        var sha = User.createPasswordSha(password);
+        if (user.password_sha !== sha) {
+          user = null;
+        }
+      }
+      return user;
+    })
+  }
+
+  // 查询根据用户名
+  function findByName(username){
+    return User.findOne({where: {username}});
+  }
+
+  // createUser
+  function createUser({username,password,email}){
+    return User.findByName(username).then(user=>{
+      if(user){
+        return {state:'error', msg:'用户已存在', user:'null'}
+      } else {
+        return User.create({username, password_sha:password ,email}).then(result=>{
+          return {state:'success', msg:'用户创建成功'};
+        }).catch(error=>{
+          return {state:'error', msg: error}
+        });
+      }
+    })
+  }
+
+  // 注入静态函数
+  Object.assign(User,{
+    createPasswordSha,
+    auth,
+    findByName,
+    createUser
+  })
+
+  return User;
 };
+
+//////////////////////

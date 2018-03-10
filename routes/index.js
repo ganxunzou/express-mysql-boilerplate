@@ -4,7 +4,7 @@ function routes(app){
   // /
   app.get('/', function(req, res, next) {
     console.log('aaa')
-    res.render('index', { title: 'Express', users: '123' , aa: [1,2,3]});
+    res.render('index', { title: 'Express', path:'index', isLogin: req.session.isLogin});
   });
 
   // /users

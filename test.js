@@ -39,12 +39,12 @@ sequelize
     });
   });
 
-  var a = function*(){
-    return yield User.findAll();
+  User.findByName = (firstName)=>{
+    console.log('><<<<<<<<<<<<<<<<<<<<<',this)
   }
 
-//   User.findAll().then(users => {
-//     console.log(users)
-//   })
-  
-console.log('a.next()', a);
+  User.findByName();
+
+  User.findOne({where: {firstName: 'John11'}}).then(user=>{
+    console.log('>>>>>>>>>>>>>>....');
+  })
