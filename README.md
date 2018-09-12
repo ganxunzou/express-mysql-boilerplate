@@ -1,13 +1,30 @@
-# express-mysql-boilerplate
+# express-mysql-es6-boilerplate
+
+## 简述
 这是一个express + Mysql 的示例工程。用到以下技术点
 - Express 4
   - express-session
   - express-promise
-  - 自定义中间件（路劲拦截器）
+  - middleware（路劲拦截器）
 - Mysql
   - Sequelize 4
 
+
+## 优点
+
+- 使用 `supervisor` 实现 `express` `hot-reload` 开发
+- 使用 `Babel` 实现 `ES6` 语言开发
+
 # 使用
+
+- 安装
+
+```js
+npm install 
+
+npm install supervisor -g  // 这里一定要加-g，因为supervisor要求全局安装
+```
+
 - 数据库
 数据库配置在`/common/sequelize.js`中，默认配置如下：
 ```
