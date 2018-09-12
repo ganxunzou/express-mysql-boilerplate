@@ -1,5 +1,5 @@
 {
-  "name": "express-mysql-boilerplate",
+  "name": "express-mysql-es6-boilerplate",
   "version": "1.0.0",
   "private": true,
   "scripts": {
