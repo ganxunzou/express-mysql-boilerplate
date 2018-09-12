@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=dev supervisor -w routes,app.js -e js,jade -- -r 'babel-register' ./bin/www",
-    "start2": "cross-env NODE_ENV=dev supervisor -w routes,app.js -e js,jade -x babel-node ./bin/www"
+    "start": "cross-env NODE_ENV=dev supervisor -w src,app.js -e js,jade -- -r 'babel-register' ./bin/www",
+    "start2": "cross-env NODE_ENV=dev supervisor -w src,app.js -e js,jade -x babel-node ./bin/www"
   },
   "dependencies": {
     "babel-register": "^6.26.0",
