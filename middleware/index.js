@@ -1,4 +1,4 @@
-var Auth = require('./Auth')
+var Auth = require('./Auth');
 function middleware(app){
     Auth(app);
 }

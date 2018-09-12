@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "cross-env NODE_ENV=dev supervisor -w routes,app.js -e js,jade -- -r 'babel-register' ./bin/www",
+    "start2": "cross-env NODE_ENV=dev supervisor -w routes,app.js -e js,jade -x babel-node ./bin/www"
   },
   "dependencies": {
+    "babel-register": "^6.26.0",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
+    "cross-env": "^5.2.0",
     "debug": "~2.6.9",
     "express": "~4.15.5",
     "express-promise": "^0.4.0",
@@ -23,7 +26,10 @@
     "utility": "^1.13.1"
   },
   "main": "app.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
+  },
   "author": "",
   "license": "ISC",
   "description": ""
