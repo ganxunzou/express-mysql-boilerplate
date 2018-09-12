@@ -6,8 +6,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var routes = require('./routes');
-var middleware = require('./middleware');
+var routes = require('./src/routes');
+var middleware = require('./src/middleware');
 
 var app = express();
 // if (app.get('env') == 'development'){
@@ -20,7 +20,7 @@ Twig.cache(false);
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'src/views'));
 app.set('view engine', 'jade');
 app.set('view cache', false);
 
