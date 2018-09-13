@@ -1,7 +1,7 @@
-var express = require('express');
+import express from 'express';
 var router = express.Router();
 
-var models = require('../models');
+import models from '../../models';
 var User = models.User;
 
 router
@@ -11,7 +11,7 @@ router
   .get('/login',(req, res, next)=>{
     res.render('login',{})
   })
-  .post('/login',(req, res, next)=>{
+  .post('/api/v1/login',(req, res, next)=>{
     let {username, password} = req.body;
     User.findByName('1').then(user=>{
       // 登录成功
@@ -24,7 +24,7 @@ router
         res.redirect('/')
       }
     })
-  }).post('/register',(req,res,next)=>{
+  }).post('/api/v1/register',(req,res,next)=>{
     let {username,password,email} = req.body;
     console.log(username,password,email)
     User.createUser({username,password,email}).then(state=>{

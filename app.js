@@ -39,7 +39,7 @@ app.use(
   })
 );
 
-middleware(app); // custom middleware
+// middleware(app); // custom middleware
 routes(app); // register routes
 
 // catch 404 and forward to error handler
